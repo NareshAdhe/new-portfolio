@@ -60,6 +60,18 @@
   transform: translate(-50%, -50%);
   transition: width 0.25s var(--ease), height 0.25s var(--ease), background 0.25s var(--ease);
 }
+
+/* 
+  Mathematical fix for light mode:
+  'mix-blend-mode: difference' over a white background normally inverts the accent color.
+  By pre-inverting the cursor with 'filter: invert(1)', the double-inversion 
+  forces the cursor to display its true primary color over white backgrounds,
+  while still successfully inverting when hovering over dark text!
+*/
+html[data-theme="light"] .cursor-dot {
+  filter: invert(1);
+}
+
 .cursor-ring {
   position: fixed;
   top: 0;
@@ -198,7 +210,8 @@
   width: 100%;
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 0 40px;
+  /* Fluid padding matches .wrap */
+  padding: 0 clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
   display: flex;
   align-items: center;
   gap: 20px;
@@ -250,7 +263,10 @@
 /* ============================================================
    SMOOTH TEXT GRADIENT SHIMMER — for hero headline on hover
    ============================================================ */
-.hero__h1 .l:first-child {
+.hero__h1 .l:first-child,
+.section-title,
+.vision__big,
+.contact__title {
   background: linear-gradient(
     90deg,
     var(--text) 0%,
@@ -269,6 +285,12 @@
 @keyframes shimmerText {
   0%, 100% { background-position: 100% center; }
   50%      { background-position: 0% center; }
+}
+
+/* Ensure amber spans within animated headings retain their color */
+.vision__big .amber,
+.contact__title .amber {
+  -webkit-text-fill-color: var(--accent);
 }
 
 /* ============================================================
@@ -395,7 +417,13 @@ html {
   .marquee__track { animation: none !important; }
   .cursor-dot, .cursor-ring { display: none !important; }
   .scroll-progress__glow { display: none; }
-  .hero__h1 .l:first-child { animation: none !important; -webkit-text-fill-color: var(--text); }
+  .hero__h1 .l:first-child,
+  .section-title,
+  .vision__big,
+  .contact__title { 
+    animation: none !important; 
+    -webkit-text-fill-color: var(--text); 
+  }
   .vision::after { animation: none !important; }
   .frame img { animation: none !important; }
   [data-parallax] { transform: none !important; }
@@ -405,13 +433,13 @@ html {
    RESPONSIVE ADJUSTMENTS
    ============================================================ */
 @media (max-width: 860px) {
-  .marquee__item { font-size: clamp(28px, 5vw, 48px); padding: 0 28px; gap: 28px; }
-  .section-divider { padding: 0 22px; }
+  .marquee__item { font-size: clamp(1.5rem, 1rem + 3vw, 3rem); padding: 0 28px; gap: 28px; }
+  .section-divider { padding: 0 clamp(1rem, 0.5rem + 2.5vw, 2.5rem); }
   .cursor-dot, .cursor-ring { display: none; }
 }
 
 @media (max-width: 560px) {
   .marquee { padding: 18px 0; }
-  .marquee__item { font-size: 24px; padding: 0 18px; gap: 18px; }
+  .marquee__item { font-size: clamp(1.25rem, 1rem + 2vw, 1.5rem); padding: 0 18px; gap: 18px; }
   .marquee__sep { width: 8px; height: 8px; }
 }

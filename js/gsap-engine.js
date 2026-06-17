@@ -160,40 +160,56 @@
   /* ── Lead text ── */
   revealFrom('.lead.reveal', { y: 18, opacity: 0, duration: 0.8 });
 
-  /* ── Stat grid — staggered pop ── */
-  gsap.utils.toArray('.statgrid').forEach((grid) => {
-    const stats = grid.querySelectorAll('.stat');
-    if (!stats.length) return;
-    gsap.from(stats, {
-      y: 20, opacity: 0, scale: 0.7, duration: 0.7,
-      stagger: 0.08, ease: 'back.out(1.7)', clearProps: 'all',
-      scrollTrigger: { trigger: grid, start: 'top 88%', once: true }
+  /* ── Premium Terminal Widget Reveal (with Typewriter) ── */
+  gsap.utils.toArray('.term-widget').forEach((term) => {
+    // 1. Text splitter for terminal typing effect
+    const chars = [];
+    term.querySelectorAll('.term__cmd, .term__json').forEach(target => {
+      const walk = document.createTreeWalker(target, NodeFilter.SHOW_TEXT, null, false);
+      const textNodes = [];
+      let n;
+      while ((n = walk.nextNode())) textNodes.push(n);
+      
+      textNodes.forEach(node => {
+        const text = node.nodeValue;
+        if (!text.trim() && !text.includes('\n')) return;
+        const frag = document.createDocumentFragment();
+        for (let i = 0; i < text.length; i++) {
+          if (/\s/.test(text[i])) {
+            frag.appendChild(document.createTextNode(text[i]));
+          } else {
+            const span = document.createElement('span');
+            span.style.opacity = '0';
+            span.textContent = text[i];
+            chars.push(span);
+            frag.appendChild(span);
+          }
+        }
+        node.parentNode.replaceChild(frag, node);
+      });
     });
-  });
 
-  /* ── Stat counter animation ── */
-  gsap.utils.toArray('.statgrid').forEach((grid) => {
-    ScrollTrigger.create({
-      trigger: grid, start: 'top 85%', once: true,
-      onEnter: () => {
-        grid.querySelectorAll('.stat__n').forEach((el) => {
-          const text = el.textContent.trim();
-          const match = text.match(/^([\d.]+)(.*)$/);
-          if (!match) return;
-          const target = parseFloat(match[1]);
-          const suffix = match[2] || '';
-          const isFloat = match[1].includes('.');
-          const obj = { val: 0 };
-          gsap.to(obj, {
-            val: target, duration: 1.4, ease: 'power2.out',
-            onUpdate: () => {
-              el.textContent = (isFloat ? obj.val.toFixed(2) : Math.floor(obj.val)) + suffix;
-            },
-            onComplete: () => { el.textContent = match[1] + suffix; }
-          });
-        });
-      }
+    // 2. Main Terminal Timeline
+    const tl = gsap.timeline({
+      scrollTrigger: { trigger: term, start: 'top 85%', once: true }
     });
+
+    // Window float-in
+    tl.from(term, {
+      y: 40, opacity: 0, scale: 0.96, rotationX: -8,
+      transformOrigin: "bottom center", filter: 'blur(12px)',
+      duration: 1.2, ease: 'expo.out'
+    });
+
+    // Letter-by-letter typing
+    if (chars.length > 0) {
+      tl.to(chars, {
+        opacity: 1,
+        duration: 0.01,
+        stagger: 0.015,
+        ease: 'none'
+      }, "-=0.4");
+    }
   });
 
   /* ── About photo — clip reveal ── */
@@ -213,11 +229,22 @@
   }, { start: 'top 90%' });
 
   gsap.from('.ars-tile', {
-    y: 28, opacity: 0, scale: 0.82, rotateX: 12,
-    duration: 0.65, stagger: 0.04, ease: 'back.out(1.4)', clearProps: 'all',
+    y: 45, 
+    opacity: 0, 
+    scale: 0.92, 
+    rotationX: -15,
+    filter: 'blur(10px)',
+    duration: 1.1, 
+    stagger: {
+      amount: 0.8,
+      grid: 'auto',
+      from: 'start'
+    },
+    ease: 'expo.out', 
+    clearProps: 'all',
     scrollTrigger: {
       trigger: '.ars-tiles',
-      start: 'top 90%',
+      start: 'top 85%',
       once: true
     },
     onComplete: () => {
@@ -234,8 +261,8 @@
         const keep = cat === 'all' || tile.dataset.cat === cat || tile.classList.contains('ars-tile--more');
         if (keep) {
           gsap.fromTo(tile,
-            { y: 16, opacity: 0, scale: 0.9 },
-            { y: 0, opacity: 1, scale: 1, duration: 0.5, delay: idx * 0.03, ease: 'back.out(1.4)', overwrite: true }
+            { y: 20, opacity: 0, scale: 0.96, filter: 'blur(5px)' },
+            { y: 0, opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.8, delay: idx * 0.04, ease: 'expo.out', overwrite: true, clearProps: 'filter' }
           );
           idx++;
         }
@@ -271,11 +298,11 @@
   });
 
   /* ============================================================
-     6. JOURNEY — feature blocks (unbundled stagger cascade)
+     6. JOURNEY — feature blocks (cinematic unbundled cascade)
      ============================================================ */
   gsap.utils.toArray('.feature.reveal').forEach((feature) => {
     const tl = gsap.timeline({
-      scrollTrigger: { trigger: feature, start: 'top 82%', once: true }
+      scrollTrigger: { trigger: feature, start: 'top 85%', once: true }
     });
 
     const parts = {
@@ -289,14 +316,14 @@
       media:   feature.querySelector('.feature__media .frame')
     };
 
-    if (parts.kicker)  tl.from(parts.kicker,  { y: 20, opacity: 0, duration: 0.6, ease: 'power3.out' }, 0);
-    if (parts.title)   tl.from(parts.title,   { clipPath: 'inset(100% 0 0 0)', y: 20, opacity: 0, duration: 1, ease: 'power3.out' }, 0.1);
-    if (parts.sub)     tl.from(parts.sub,     { y: 16, opacity: 0, duration: 0.7, ease: 'power3.out' }, 0.25);
-    if (parts.text)    tl.from(parts.text,    { y: 16, opacity: 0, duration: 0.8, ease: 'power2.out' }, 0.35);
-    if (parts.metrics) tl.from(parts.metrics, { x: 30, opacity: 0, duration: 0.8, ease: 'power3.out' }, 0.45);
-    if (parts.tagline) tl.from(parts.tagline, { y: 12, opacity: 0, duration: 0.6, ease: 'power3.out' }, 0.55);
-    if (parts.pub)     tl.from(parts.pub,     { y: 16, opacity: 0, duration: 0.7, ease: 'power3.out' }, 0.45);
-    if (parts.media)   tl.from(parts.media,   { clipPath: 'inset(8% 8% 8% 8%)', scale: 0.92, opacity: 0, duration: 1, ease: 'power3.out' }, 0.15);
+    if (parts.kicker)  tl.from(parts.kicker,  { y: 20, opacity: 0, duration: 0.8, ease: 'expo.out' }, 0);
+    if (parts.title)   tl.from(parts.title,   { clipPath: 'inset(100% 0 0 0)', y: 30, opacity: 0, duration: 1.2, ease: 'expo.out' }, 0.1);
+    if (parts.sub)     tl.from(parts.sub,     { y: 20, opacity: 0, filter: 'blur(4px)', duration: 1, ease: 'expo.out' }, 0.25);
+    if (parts.text)    tl.from(parts.text,    { y: 30, opacity: 0, filter: 'blur(10px)', duration: 1.4, ease: 'expo.out' }, 0.35);
+    if (parts.metrics) tl.from(parts.metrics, { x: 40, opacity: 0, filter: 'blur(6px)', duration: 1.2, ease: 'expo.out' }, 0.45);
+    if (parts.tagline) tl.from(parts.tagline, { y: 15, opacity: 0, duration: 0.8, ease: 'expo.out' }, 0.55);
+    if (parts.pub)     tl.from(parts.pub,     { y: 20, opacity: 0, filter: 'blur(5px)', duration: 1, ease: 'expo.out' }, 0.45);
+    if (parts.media)   tl.from(parts.media,   { clipPath: 'inset(12% 12% 12% 12%)', scale: 0.85, opacity: 0, filter: 'blur(8px)', duration: 1.4, ease: 'expo.out' }, 0.15);
   });
 
   /* ============================================================
@@ -458,6 +485,9 @@
      ============================================================ */
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener('click', (e) => {
+      // Mobile menu links have their own delayed scroll logic in main.js
+      if (a.closest('.nav__mobile')) return;
+
       const id = a.getAttribute('href');
       if (id === '#') return;
       const target = document.querySelector(id);

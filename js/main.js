@@ -131,9 +131,37 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  burger.addEventListener('click', () => mobile.classList.toggle('open'));
+  burger.addEventListener('click', () => {
+    const isOpen = mobile.classList.toggle('open');
+    burger.classList.toggle('is-active', isOpen);
+    document.body.classList.toggle('no-scroll', isOpen);
+    document.documentElement.classList.toggle('no-scroll', isOpen);
+  });
   mobile.querySelectorAll('a').forEach((a) =>
-    a.addEventListener('click', () => mobile.classList.remove('open'))
+    a.addEventListener('click', (e) => {
+      const target = a.getAttribute('href');
+      
+      // Close the menu immediately
+      mobile.classList.remove('open');
+      burger.classList.remove('is-active');
+      document.body.classList.remove('no-scroll');
+      document.documentElement.classList.remove('no-scroll');
+
+      // If it's an internal anchor link
+      if (target && target.startsWith('#')) {
+        e.preventDefault();
+        
+        // Wait for the premium clip-path animation to finish (0.7s) before scrolling
+        setTimeout(() => {
+          const section = document.querySelector(target);
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+            // Update URL without jumping
+            history.pushState(null, null, target);
+          }
+        }, 700);
+      }
+    })
   );
 })();
 
@@ -244,9 +272,10 @@
     pill.addEventListener('click', () => {
       pills.forEach((p) => p.classList.toggle('is-on', p === pill));
       const cat = pill.dataset.cat;
+      const isAll = cat === 'all';
       tiles.forEach((t) => {
-        const keep =
-          cat === 'all' || t.dataset.cat === cat || t.classList.contains('ars-tile--more');
+        const isMatch = t.dataset.cat === cat;
+        const keep = isAll || isMatch || t.classList.contains('ars-tile--more');
         t.classList.toggle('is-dim', !keep);
       });
     })
