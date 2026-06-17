@@ -4,8 +4,6 @@
 
 A personal portfolio website showcasing my work as a **Full-Stack Developer, DevOps Engineer, and Competitive Programmer** — built from scratch with vanilla HTML, CSS, and JavaScript.
 
-🔗 **Live:** [nareshadhe.github.io/portfolio](https://NareshAdhe.github.io/new-portfolio/)
-
 ---
 
 ## What's Inside
