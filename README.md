@@ -4,7 +4,7 @@
 
 A personal portfolio website showcasing my work as a **Full-Stack Developer, DevOps Engineer, and Competitive Programmer** — built from scratch with vanilla HTML, CSS, and JavaScript.
 
-🔗 **Live:** [nareshadhe.github.io/portfolio](https://NareshAdhe.github.io/portfolio/)
+🔗 **Live:** [nareshadhe.github.io/portfolio](https://NareshAdhe.github.io/new-portfolio/)
 
 ---
 
@@ -16,7 +16,7 @@ A personal portfolio website showcasing my work as a **Full-Stack Developer, Dev
 | **About** | My story, background, and key stats (1000+ DSA, 9.05 CGPA) |
 | **Arsenal** | Skills across Languages, Frontend, Backend & DevOps, and Tools |
 | **Missions** | Featured projects — DockViz, Local Linker, XPENS, NexusShell |
-| **Journey** | Privado (SDE Intern), WLUG (Lead Web Dev), WCE Sangli (B.Tech) |
+| **Journey** | Privado AI (SDE Intern), WLUG (Lead Web Dev), WCE Sangli (B.Tech) |
 | **Contact** | Links to email, LinkedIn, GitHub, LeetCode |
 
 ---
@@ -54,8 +54,8 @@ Built with **zero frameworks** — pure HTML, CSS, and vanilla JS. Deployed on *
 ## Run Locally
 
 ```bash
-git clone https://github.com/NareshAdhe/portfolio.git
-cd portfolio
+git clone https://github.com/NareshAdhe/new-portfolio.git
+cd new-portfolio
 # open index.html in your browser
 ```
 
