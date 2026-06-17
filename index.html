@@ -1,0 +1,1290 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Naresh Adhe — Full-Stack Developer · Cloud & DevOps Engineer · Competitive
+      Programmer
+    </title>
+    <meta
+      name="description"
+      content="Naresh Rajendra Adhe — Computer Science & Engineering student at WCE Sangli. Full-stack developer, DevOps engineer, and competitive programmer building scalable web applications and cloud infrastructure."
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/sections.css" />
+    <link rel="stylesheet" href="css/premium.css" />
+    <script>
+      /* apply saved theme before first paint to avoid a flash */
+      (function () {
+        document.documentElement.classList.add('js');
+        try {
+          var t = localStorage.getItem("na_theme");
+          if (t === "light")
+            document.documentElement.setAttribute("data-theme", "light");
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+
+  <body>
+    <!-- ===================== SCROLL PROGRESS ===================== -->
+    <div class="scroll-progress" aria-hidden="true">
+      <div class="scroll-progress__bar"></div>
+      <div class="scroll-progress__glow"></div>
+    </div>
+
+    <!-- ===================== CUSTOM CURSOR ===================== -->
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+    <!-- ===================== BACKGROUND ===================== -->
+    <div class="bg-layer" aria-hidden="true">
+      <div class="bg-aurora">
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
+        <div class="blob b3"></div>
+        <div class="blob b4"></div>
+        <div class="blob b5"></div>
+      </div>
+      <div class="bg-grid"></div>
+      <div class="bg-grid-glow"></div>
+      <div class="bg-cursor"></div>
+      <div class="bg-particles" id="bgParticles"></div>
+      <div class="bg-vignette"></div>
+    </div>
+
+    <!-- shared SVG filter defs -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <filter id="swooshGlow" x="-50%" y="-300%" width="200%" height="700%">
+          <feGaussianBlur stdDeviation="3.5" />
+        </filter>
+      </defs>
+    </svg>
+
+    <!-- ===================== BOOT OVERLAY ===================== -->
+    <div class="boot" id="boot">
+      <div class="boot__reactor">
+        <div class="boot__core"></div>
+      </div>
+      <div class="boot__lines" id="bootLines">
+        <div class="boot__line" data-step="0">Initializing systems…</div>
+      </div>
+      <div class="boot__name" id="bootName">Naresh Adhe</div>
+      <div class="boot__bar"><span id="bootBar"></span></div>
+    </div>
+
+    <!-- ===================== NAV ===================== -->
+    <nav class="nav" id="nav">
+      <div class="nav__inner">
+        <a href="#home" class="nav__logo"
+          ><span class="av">NA</span> naresh.adhe</a
+        >
+        <div class="nav__links" id="navLinks">
+          <a class="nav__link" href="#home" data-sec="home">Home</a>
+          <a class="nav__link" href="#about" data-sec="about">About</a>
+          <a class="nav__link" href="#arsenal" data-sec="arsenal">Arsenal</a>
+          <a class="nav__link" href="#missions" data-sec="missions">Missions</a>
+          <a class="nav__link" href="#journey" data-sec="journey">Journey</a>
+          <a class="nav__link" href="#contact" data-sec="contact">Contact</a>
+        </div>
+        <a
+          class="nav__cta"
+          href="https://drive.google.com/file/d/1RtPvs4Hr11Oxd0JA3SXu32Yr_FO9eNvB/view?usp=sharing"
+          target="_blank"
+          rel="noopener"
+          >Resume ↗</a
+        >
+        <div class="color-picker-wrap">
+          <button
+            class="nav__theme nav__color"
+            id="colorToggle"
+            type="button"
+            aria-label="Change primary color"
+            title="Change theme color"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+            </svg>
+          </button>
+          <div class="color-popover" id="colorPopover">
+            <button class="color-swatch is-active" data-color="amber" style="--c: #f2a93b;" aria-label="Amber"></button>
+            <button class="color-swatch" data-color="emerald" style="--c: #10b981;" aria-label="Emerald"></button>
+            <button class="color-swatch" data-color="blue" style="--c: #3b82f6;" aria-label="Blue"></button>
+            <button class="color-swatch" data-color="rose" style="--c: #f43f5e;" aria-label="Rose"></button>
+          </div>
+        </div>
+        <button
+          class="nav__theme"
+          id="themeToggle"
+          type="button"
+          aria-label="Toggle light or dark mode"
+          title="Toggle theme"
+        >
+          <svg
+            class="ico-sun"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+          >
+            <circle cx="12" cy="12" r="4.2" />
+            <path
+              d="M12 2.2v2.2M12 19.6v2.2M4.4 4.4l1.6 1.6M18 18l1.6 1.6M2.2 12h2.2M19.6 12h2.2M4.4 19.6l1.6-1.6M18 6l1.6-1.6"
+            />
+          </svg>
+          <svg
+            class="ico-moon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 14.5A8 8 0 0 1 9.5 4a6.5 6.5 0 1 0 10.5 10.5Z" />
+          </svg>
+        </button>
+        <div class="nav__burger" id="burger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="nav__mobile" id="navMobile">
+        <a href="#about">About</a>
+        <a href="#arsenal">Arsenal</a>
+        <a href="#missions">Missions</a>
+        <a href="#journey">Journey</a>
+        <a href="#contact">Contact</a>
+        <a
+          href="https://drive.google.com/file/d/1RtPvs4Hr11Oxd0JA3SXu32Yr_FO9eNvB/view?usp=sharing"
+          target="_blank"
+          rel="noopener"
+          >Download Resume ↗</a
+        >
+      </div>
+    </nav>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="home">
+      <div class="wrap hero__grid">
+        <div class="hero__col">
+          <div class="hero__eyebrow hero__rise" data-d="1">
+            <span class="label label--accent"
+              ><span class="dot"></span>Available for work · Upcoming SDE Intern
+              at Privado AI</span
+            >
+          </div>
+
+          <h1 class="hero__h1">
+            <span class="l">Full-Stack Dev.</span>
+            <span class="l"><span class="muted">DevOps.</span></span>
+            <span class="l"
+              ><span class="amber amber--swoosh"
+                >Builder.<svg
+                  class="hero-swoosh"
+                  viewBox="0 0 320 24"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    class="sw sw--glow"
+                    d="M8 16 C 90 7, 230 7, 312 14"
+                    style="opacity: 0"
+                  />
+                  <path
+                    class="sw"
+                    d="M8 16 C 90 7, 230 7, 312 14"
+                  /></svg></span
+            ></span>
+          </h1>
+
+          <div class="hero__type hero__rise" data-d="2">
+            <span id="typed"></span><span class="cursor" id="cursor">_</span>
+          </div>
+
+          <p class="hero__quote hero__rise" data-d="3">
+            I don't wait for the future. I engineer it.
+          </p>
+
+          <p class="hero__desc hero__rise" data-d="4">
+            Computer Science &amp; Engineering student at WCE Sangli, building
+            <span class="amber">scalable web applications</span> with <span class="amber">MERN/PERN stacks</span>, automating <span class="amber">DevOps
+            pipelines</span>, and solving <span class="amber">1000+ DSA problems</span> on the way.
+          </p>
+
+          <div class="hero__cta hero__rise" data-d="5">
+            <a class="btn btn--primary" href="#missions">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+              Explore My Work
+            </a>
+            <a
+              class="btn btn--ghost"
+              href="https://drive.google.com/file/d/1mUGjSUHrKTfsiqO-nBWFhmG-vFfdRcrh/view?usp=sharing"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
+              </svg>
+              Download Resume
+            </a>
+          </div>
+
+          <div class="hero__chips hero__rise" data-d="5">
+            <div class="chips">
+              <span class="chip">JavaScript</span>
+              <span class="chip">Linux</span>
+              <span class="chip">DevOps</span>
+              <span class="chip">AWS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- INTERACTIVE ID CARD -->
+        <div class="hero__col idwrap">
+          <svg class="hero-orbit" viewBox="0 0 600 600" aria-hidden="true">
+            <g class="orbit">
+              <circle class="ring ring--dash" cx="300" cy="300" r="284" />
+              <circle class="sat" cx="300" cy="16" r="4" />
+            </g>
+            <g class="orbit orbit--rev">
+              <circle class="ring ring--faint" cx="300" cy="300" r="238" />
+              <circle class="sat" cx="538" cy="300" r="3" />
+            </g>
+          </svg>
+          <div class="idcard" id="idcard">
+            <div class="idcard__notch"></div>
+            <div class="idcard__top">
+              <div class="idcard__org">
+                ACCESS · BUILDER PASS<br /><b
+                  >COMPUTER SCIENCE &amp; ENGINEERING</b
+                >
+              </div>
+              <div class="idcard__chip"></div>
+            </div>
+            <div class="frame idcard__photo" data-img="assets/profile.png">
+              <img src="assets/profile.png" alt="Naresh Adhe" />
+              <div class="frame__ph">
+                <span class="pin">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                  >
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
+                  </svg>
+                </span>
+                <span>profile.jpg</span>
+              </div>
+            </div>
+            <div class="idcard__name">Naresh Adhe</div>
+            <div class="idcard__role">FULL-STACK DEV · DEVOPS</div>
+            <div class="idcard__meta">
+              <div>ID<b>NA–2026</b></div>
+              <div>STATUS<b style="color: var(--accent)">Building</b></div>
+              <div>CLR<b>Cloud-Native</b></div>
+            </div>
+            <div class="idcard__barcode"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scrollcue"><span>scroll</span><span class="arr">↓</span></div>
+    </section>
+
+    <!-- ===================== MARQUEE TICKER ===================== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__item">Full-Stack Developer</span><span class="marquee__sep"></span>
+        <span class="marquee__item">Cloud Engineer</span><span class="marquee__sep"></span>
+        <span class="marquee__item">DevOps Architect</span><span class="marquee__sep"></span>
+        <span class="marquee__item">System Designer</span><span class="marquee__sep"></span>
+        <span class="marquee__item">Problem Solver</span><span class="marquee__sep"></span>
+        <span class="marquee__item">Full-Stack Developer</span><span class="marquee__sep"></span>
+        <span class="marquee__item">Cloud Engineer</span><span class="marquee__sep"></span>
+        <span class="marquee__item">DevOps Architect</span><span class="marquee__sep"></span>
+        <span class="marquee__item">System Designer</span><span class="marquee__sep"></span>
+        <span class="marquee__item">Problem Solver</span><span class="marquee__sep"></span>
+      </div>
+    </div>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section class="about section-pad" id="about">
+      <div class="wrap about__grid">
+        <div class="about__story">
+          <span class="label reveal"><span class="dot"></span>About Me</span>
+          <h2 class="section-title reveal" data-d="1">
+            Not your typical<br />engineering student.
+          </h2>
+          <p class="lead reveal" data-d="2">
+            It started with <span class="amber">curiosity.</span>
+          </p>
+          <p class="reveal" data-d="2">
+            I am a 21-year-old Computer Science and Engineering student at
+            Walchand College of Engineering, Sangli. I am deeply passionate
+            about <span class="amber">full-stack web development, DevOps pipelines</span>, cloud
+            infrastructure, and advanced problem-solving.
+          </p>
+          <p class="reveal" data-d="3">
+            With a strong foundation in both the <span class="amber">MERN and PERN stacks</span>, I design
+            and engineer scalable web applications, real-time developer tools,
+            and automation scripts. I am highly active in competitive
+            programming (holding a <span class="amber">Knight rank on LeetCode</span>) and possess hands-on
+            experience managing Linux systems, orchestration platforms, and
+            hardware/IoT integrations.
+          </p>
+          <p class="reveal" data-d="3">
+            My ultimate career objective is to become a highly skilled Software
+            Engineer specializing in <span class="amber">scalable cloud infrastructure</span>, <span class="amber">robust
+            system design</span>, and streamlined DevOps practices.
+          </p>
+        </div>
+
+        <div class="about__side">
+          <div
+            class="frame about__photo"
+            data-d="2"
+            data-img="assets/profile-large.png"
+          >
+            <img
+              src="assets/profile-large.png"
+              alt="Aviraj Virape"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="frame__ph">
+              <span class="pin">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                >
+                  <circle cx="12" cy="8" r="4" />
+                  <path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
+                </svg>
+              </span>
+              <span>profile-large.jpg</span>
+            </div>
+          </div>
+          <div class="statgrid" data-d="3">
+            <div class="stat">
+              <div class="stat__n">1000+</div>
+              <div class="stat__l">DSA problems<br />solved</div>
+            </div>
+            <div class="stat">
+              <div class="stat__n">9.05</div>
+              <div class="stat__l">CGPA at<br />WCE Sangli</div>
+            </div>
+            <div class="stat">
+              <div class="stat__n">3rd</div>
+              <div class="stat__l">Docker Wargames<br />2025</div>
+            </div>
+            <div class="stat">
+              <div class="stat__n">∞</div>
+              <div class="stat__l">Reasons to<br />keep building</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ARSENAL ===================== -->
+    <section class="arsenal section-pad" id="arsenal">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="label reveal"><span class="dot"></span>The Arsenal</span>
+          <h2 class="section-title reveal" data-d="1">Tools of the Trade</h2>
+          <p class="section-sub reveal" data-d="2">
+            Every skill here was earned on a real project — not a tutorial.
+          </p>
+        </div>
+
+        <div class="ars-filters reveal" data-d="2">
+          <button class="ars-pill is-on" data-cat="all" type="button">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <rect x="4" y="4" width="6" height="6" rx="1.5" />
+              <rect x="14" y="4" width="6" height="6" rx="1.5" />
+              <rect x="4" y="14" width="6" height="6" rx="1.5" />
+              <rect x="14" y="14" width="6" height="6" rx="1.5" />
+            </svg>
+            All
+          </button>
+          <button class="ars-pill" data-cat="languages" type="button">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <path d="M18 5H6l7 7-7 7h12" />
+            </svg>
+            Languages
+          </button>
+          <button class="ars-pill" data-cat="frontend" type="button">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
+            </svg>
+            Frontend
+          </button>
+          <button class="ars-pill" data-cat="backend" type="button">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <path d="M5 20v-6M11 20V8M17 20v-9M3 20h18" />
+            </svg>
+            Backend &amp; DevOps
+          </button>
+          <button class="ars-pill" data-cat="tools" type="button">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6Z" />
+            </svg>
+            Tools &amp; Platforms
+          </button>
+        </div>
+
+        <div class="ars-tiles reveal" data-d="3">
+          <div class="ars-tile" data-cat="languages" style="--i: 0">
+            <span class="ars-tile__icon"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+              >
+                <path d="M18 5H6l7 7-7 7h12" /></svg
+            ></span>
+            <span class="ars-tile__name">C / C++</span>
+          </div>
+          <div class="ars-tile" data-cat="languages" style="--i: 1">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/javascript/f2a93b"
+                alt="JavaScript"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">JavaScript</span>
+          </div>
+          <div class="ars-tile" data-cat="languages" style="--i: 2">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/python/f2a93b"
+                alt="Python"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">Python</span>
+          </div>
+          <div class="ars-tile" data-cat="languages" style="--i: 3">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/go/f2a93b"
+                alt="Golang"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">Golang</span>
+          </div>
+          <div class="ars-tile" data-cat="frontend" style="--i: 4">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/react/f2a93b"
+                alt="React"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">React.js</span>
+          </div>
+          <div class="ars-tile" data-cat="frontend" style="--i: 5">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/tailwindcss/f2a93b"
+                alt="Tailwind"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">Tailwind CSS</span>
+          </div>
+          <div class="ars-tile" data-cat="frontend" style="--i: 6">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/greensock/f2a93b"
+                alt="GSAP"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">GSAP</span>
+          </div>
+          <div class="ars-tile" data-cat="backend" style="--i: 7">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/nodedotjs/f2a93b"
+                alt="Node.js"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">Node.js</span>
+          </div>
+          <div class="ars-tile" data-cat="backend" style="--i: 8">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/express/f2a93b"
+                alt="Express"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">Express.js</span>
+          </div>
+          <div class="ars-tile" data-cat="backend" style="--i: 9">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/mongodb/f2a93b"
+                alt="MongoDB"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">MongoDB</span>
+          </div>
+          <div class="ars-tile" data-cat="backend" style="--i: 10">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/postgresql/f2a93b"
+                alt="PostgreSQL"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">PostgreSQL</span>
+          </div>
+          <div class="ars-tile" data-cat="backend" style="--i: 11">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/docker/f2a93b"
+                alt="Docker"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">Docker</span>
+          </div>
+          <div class="ars-tile" data-cat="backend" style="--i: 12">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/kubernetes/f2a93b"
+                alt="Kubernetes"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">Kubernetes</span>
+          </div>
+          <div class="ars-tile" data-cat="backend" style="--i: 13">
+            <span class="ars-tile__icon"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+              >
+                <path
+                  d="M6.5 17C3.5 17 2 15.2 2 13s1.8-4 4-4.2C6.4 5.8 9 4 12 4c3.5 0 6 2.5 6.5 5.8C21 10 22 11.8 22 14c0 2-1.5 3-3.5 3"
+                />
+                <path d="M8 17l4 4 4-4" />
+                <path d="M12 21V12" /></svg
+            ></span>
+            <span class="ars-tile__name">AWS</span>
+          </div>
+          <div class="ars-tile" data-cat="backend" style="--i: 14">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/jenkins/f2a93b"
+                alt="Jenkins"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">Jenkins</span>
+          </div>
+          <div class="ars-tile" data-cat="backend" style="--i: 15">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/nginx/f2a93b"
+                alt="Nginx"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">Nginx</span>
+          </div>
+          <div class="ars-tile" data-cat="tools" style="--i: 16">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/git/f2a93b"
+                alt="Git"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">Git</span>
+          </div>
+          <div class="ars-tile" data-cat="tools" style="--i: 17">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/github/f2a93b"
+                alt="GitHub"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">GitHub</span>
+          </div>
+          <div class="ars-tile" data-cat="tools" style="--i: 18">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/linux/f2a93b"
+                alt="Linux"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">Linux</span>
+          </div>
+          <div class="ars-tile" data-cat="tools" style="--i: 19">
+            <span class="ars-tile__icon"
+              ><img
+                src="https://cdn.simpleicons.org/firebase/f2a93b"
+                alt="Firebase"
+                loading="lazy"
+            /></span>
+            <span class="ars-tile__name">Firebase</span>
+          </div>
+          <div class="ars-tile ars-tile--more" data-cat="all" style="--i: 20">
+            <span class="ars-tile__plus">+∞</span>
+            <span class="ars-tile__name">Always learning</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MISSIONS ===================== -->
+    <section class="missions section-pad" id="missions">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="label reveal"
+            ><span class="dot"></span>Selected Missions</span
+          >
+          <h2 class="section-title reveal" data-d="1">
+            Problems I attacked.<br />Systems I built.
+          </h2>
+        </div>
+
+        <!-- Mission 01 — DockViz -->
+        <article class="mission">
+          <div
+            class="frame mission__media"
+            data-img="assets/projects/dockviz.png"
+          >
+            <img
+              src="assets/projects/dockviz.png"
+              alt="DockViz"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="frame__ph">
+              <span class="pin"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                >
+                  <rect x="3" y="4" width="18" height="14" rx="2" />
+                  <path d="M8 21h8M12 18v3" /></svg
+              ></span>
+              <span>projects/dockviz.png</span>
+            </div>
+          </div>
+          <div class="mission__body reveal" data-d="1">
+            <div class="mission__no">Project 02</div>
+            <h3 class="mission__title">DockViz</h3>
+            <div class="mission__tag">
+              Real-time Docker topology visualizer.
+            </div>
+            <p class="mission__desc">
+              A <span class="amber">real-time Docker topology visualizer</span> highlighting core
+              containerization and architecture patterns. Streams live container
+              events and renders <span class="amber">interactive network graphs</span> for instant
+              infrastructure insight.
+            </p>
+            <div class="mission__stack chips">
+              <span class="chip">React Flow</span
+              ><span class="chip">Docker API</span> <span class="chip">AWS</span
+              ><span class="chip">CI/CD</span>
+            </div>
+            <div class="mission__links">
+              <a
+                class="mission__link"
+                href="https://github.com/NareshAdhe/DockViz"
+                target="_blank"
+                rel="noopener"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.4 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.3 10.3 0 0 0 22 12.3C22 6.6 17.5 2 12 2Z"
+                  />
+                </svg>
+                Source
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Mission 02 — Local Linker -->
+        <article class="mission">
+          <div
+            class="frame mission__media"
+            data-img="assets/projects/locallinker.png"
+          >
+            <img
+              src="assets/projects/locallinker.png"
+              alt="Local Linker"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="frame__ph">
+              <span class="pin"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                >
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="M21 21l-4.3-4.3" /></svg
+              ></span>
+              <span>projects/locallinker.png</span>
+            </div>
+          </div>
+          <div class="mission__body reveal" data-d="1">
+            <div class="mission__no">Project 04</div>
+            <h3 class="mission__title">Local Linker</h3>
+            <div class="mission__tag">
+              Connecting influencers with local businesses.
+            </div>
+            <p class="mission__desc">
+              A <span class="amber">scalable B2B collaboration marketplace</span> linking local influencers
+              with business owners. Features <span class="amber">real-time bi-directional messaging</span>
+              using WebSockets, category-based search filtering, and user
+              networking profiles — powered by the full MERN stack with
+              Socket.io.
+            </p>
+            <div class="mission__stack chips">
+              <span class="chip">MongoDB</span
+              ><span class="chip">Express.js</span>
+              <span class="chip">React.js</span
+              ><span class="chip">Socket.io</span>
+              <span class="chip">Redis</span>
+            </div>
+            <div class="mission__links">
+              <a
+                class="mission__link"
+                href="https://github.com/NareshAdhe/Local_Linker"
+                target="_blank"
+                rel="noopener"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.4 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.3 10.3 0 0 0 22 12.3C22 6.6 17.5 2 12 2Z"
+                  />
+                </svg>
+                Source
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Mission 03 — XPENS -->
+        <article class="mission">
+          <div
+            class="frame mission__media"
+            data-img="assets/projects/xpens.png"
+          >
+            <img
+              src="assets/projects/xpens.png"
+              alt="XPENS"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="frame__ph">
+              <span class="pin"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                >
+                  <path d="M3 17l5-6 4 3 6-8" />
+                  <path d="M3 21h18" /></svg
+              ></span>
+              <span>projects/xpens.png</span>
+            </div>
+          </div>
+          <div class="mission__body reveal" data-d="1">
+            <div class="mission__no">Project 03</div>
+            <h3 class="mission__title">XPENS</h3>
+            <div class="mission__tag">
+              Personal finance, fully under control.
+            </div>
+            <p class="mission__desc">
+              A comprehensive <span class="amber">personal finance and expense management system</span>.
+              Features <span class="amber">financial dashboard analytics</span>, custom expense
+              categorization, secure JWT authentication, and a fully responsive
+              layout — built end-to-end on the MERN stack.
+            </p>
+            <div class="mission__stack chips">
+              <span class="chip">MongoDB</span
+              ><span class="chip">Express.js</span>
+              <span class="chip">React.js</span
+              ><span class="chip">Node.js</span>
+            </div>
+            <div class="mission__links">
+              <a
+                class="mission__link"
+                href="https://github.com/NareshAdhe/XPENS"
+                target="_blank"
+                rel="noopener"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.4 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.3 10.3 0 0 0 22 12.3C22 6.6 17.5 2 12 2Z"
+                  />
+                </svg>
+                Source
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Mission 04 — NexusShell -->
+        <article class="mission">
+          <div
+            class="frame mission__media"
+            data-img="assets/projects/nexusshell.png"
+          >
+            <img
+              src="assets/projects/nexusshell.png"
+              alt="NexusShell"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="frame__ph">
+              <span class="pin"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                >
+                  <rect x="3" y="4" width="18" height="14" rx="2" />
+                  <path d="M8 21h8M12 18v3" /></svg
+              ></span>
+              <span>projects/nexusshell.png</span>
+            </div>
+          </div>
+          <div class="mission__body reveal" data-d="1">
+            <div class="mission__no">Project 01</div>
+            <h3 class="mission__title">NexusShell</h3>
+            <div class="mission__tag">
+              A Unix shell, engineered from scratch.
+            </div>
+            <p class="mission__desc">
+              A minimal, <span class="amber">high-performance Unix shell</span> managing process execution
+              and workflows. Features <span class="amber">robust command execution</span> via $PATH using
+              execvp, <span class="amber">multi-stage pipeline support</span> (cmd1 | cmd2) via pipe and
+              dup2, background process execution (&amp;), and built-in shell
+              commands (cd, exit) utilizing fork and wait process management.
+            </p>
+            <div class="mission__stack chips">
+              <span class="chip">C++</span><span class="chip">POSIX</span
+              ><span class="chip">Linux</span>
+              <span class="chip">System Calls</span>
+            </div>
+            <div class="mission__links">
+              <a
+                class="mission__link"
+                href="https://github.com/NareshAdhe/NexusShell"
+                target="_blank"
+                rel="noopener"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.4 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.3 10.3 0 0 0 22 12.3C22 6.6 17.5 2 12 2Z"
+                  />
+                </svg>
+                Source
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================== MARQUEE TICKER 2 ===================== -->
+    <div class="marquee marquee--reverse" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__item">React.js</span><span class="marquee__sep"></span>
+        <span class="marquee__item">Node.js</span><span class="marquee__sep"></span>
+        <span class="marquee__item">Docker</span><span class="marquee__sep"></span>
+        <span class="marquee__item">Kubernetes</span><span class="marquee__sep"></span>
+        <span class="marquee__item">AWS</span><span class="marquee__sep"></span>
+        <span class="marquee__item">PostgreSQL</span><span class="marquee__sep"></span>
+        <span class="marquee__item">React.js</span><span class="marquee__sep"></span>
+        <span class="marquee__item">Node.js</span><span class="marquee__sep"></span>
+        <span class="marquee__item">Docker</span><span class="marquee__sep"></span>
+        <span class="marquee__item">Kubernetes</span><span class="marquee__sep"></span>
+        <span class="marquee__item">AWS</span><span class="marquee__sep"></span>
+        <span class="marquee__item">PostgreSQL</span><span class="marquee__sep"></span>
+      </div>
+    </div>
+
+    <!-- ===================== JOURNEY (Mahaguru / Innovexis / Research) ===================== -->
+    <section class="journey section-pad" id="journey">
+      <div class="wrap">
+        <div class="circuit" aria-hidden="true">
+          <svg viewBox="0 0 2 1000" preserveAspectRatio="none">
+            <path
+              id="circuitPath"
+              d="M1 0 V 1000"
+              vector-effect="non-scaling-stroke"
+            />
+          </svg>
+          <span class="circuit-head" id="circuitHead"></span>
+        </div>
+        <div class="section-head">
+          <span class="label reveal"><span class="dot"></span>The Journey</span>
+          <h2 class="section-title reveal" data-d="1">
+            Experience, leadership,<br />and education.
+          </h2>
+        </div>
+
+        <!-- Privado -->
+        <div class="feature reveal" data-d="1">
+          <div class="feature__grid">
+            <div class="feature__body">
+              <span class="feature__kicker">Upcoming Internship</span>
+              <h3 class="feature__title">Privado AI — SDE Intern</h3>
+              <p class="feature__sub">
+                Incoming Software Development Engineering intern.
+              </p>
+              <p class="feature__text">
+                Preparing to contribute to <span class="amber">core engineering, scalable
+                architecture</span>, and <span class="amber">software delivery</span> at Privado. Focused on
+                building <span class="amber">robust, production-grade systems</span> and collaborating with
+                experienced engineering teams.
+              </p>
+              <div class="feature__metrics">
+                <div class="feature__metric">
+                  <div class="n">SDE</div>
+                  <div class="l">Role</div>
+                </div>
+                <div class="feature__metric">
+                  <div class="n">2026</div>
+                  <div class="l">Upcoming</div>
+                </div>
+              </div>
+              <div class="feature__tagline">Ready to ship. Ready to learn.</div>
+            </div>
+            <div class="feature__media">
+              <div class="frame" data-img="assets/privado.jpeg">
+                <img
+                  src="assets/privado.jpeg"
+                  alt="Privado"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="frame__ph">
+                  <span class="pin"
+                    ><svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                    >
+                      <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3Z" />
+                      <path d="M12 12v9M12 12 4 7.5M12 12l8-4.5" /></svg
+                  ></span>
+                  <span>privado.png — company logo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WLUG -->
+        <div class="feature feature--flip reveal" data-d="2">
+          <div class="feature__grid">
+            <div class="feature__body">
+              <span class="feature__kicker">Leadership Role</span>
+              <h3 class="feature__title">WLUG — Lead Web Dev</h3>
+              <p class="feature__sub">Walchand Linux Users' Group.</p>
+              <p class="feature__text">
+                Lead engineering initiatives for web applications, maintaining
+                <span class="amber">community infrastructure</span>, and driving <span class="amber">open-source adoption</span> and
+                <span class="amber">Linux administration</span> across the college community.
+              </p>
+              <div class="feature__metrics">
+                <div class="feature__metric">
+                  <div class="n">Lead</div>
+                  <div class="l">Web<br />Developer</div>
+                </div>
+                <div class="feature__metric">
+                  <div class="n">Walchand</div>
+                  <div class="l">Linux Users'<br />Group</div>
+                </div>
+              </div>
+            </div>
+            <div class="feature__media">
+              <div class="frame" data-img="assets/wlug.png">
+                <img
+                  src="assets/wlug.png"
+                  alt="WLUG"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="frame__ph">
+                  <span class="pin"
+                    ><svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                    >
+                      <rect x="3" y="4" width="18" height="14" rx="2" />
+                      <path d="M8 20h8" /></svg
+                  ></span>
+                  <span>wlug.png — community logo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="feature reveal" data-d="3">
+          <div class="feature__grid">
+            <div class="feature__body">
+              <span class="feature__kicker">Education</span>
+              <h3 class="feature__title">WCE Sangli — B.Tech CSE</h3>
+              <p class="feature__text">
+                Bachelor of Technology in Computer Science and Engineering at
+                Walchand College of Engineering, Sangli, Maharashtra
+                (2023–2027). Maintaining a <span class="amber">CGPA of 9.05</span> while actively
+                contributing to <span class="amber">open-source, competitive programming</span>, and
+                <span class="amber">technical leadership</span>.
+              </p>
+              <div class="pub">
+                <div class="pub__row">
+                  <span class="pub__k">Degree</span
+                  ><span class="pub__v"
+                    >B.Tech — Computer Science &amp; Engineering</span
+                  >
+                </div>
+                <div class="pub__row">
+                  <span class="pub__k">CGPA</span
+                  ><span class="pub__v">9.05</span>
+                </div>
+                <div class="pub__row">
+                  <span class="pub__k">Timeline</span
+                  ><span class="pub__v">2023 – 2027</span>
+                </div>
+              </div>
+              <div class="feature__tagline">
+                Knight on LeetCode. 3-Star on CodeChef.
+              </div>
+            </div>
+            <div class="feature__media">
+              <div class="frame" data-img="assets/wce.jpeg">
+                <img
+                  src="assets/wce.jpeg"
+                  alt="WCE Sangli"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="frame__ph">
+                  <span class="pin"
+                    ><svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                    >
+                      <circle cx="12" cy="9" r="5" />
+                      <path d="M9 13l-1.5 7L12 18l4.5 2L15 13" /></svg
+                  ></span>
+                  <span>wce.png — college</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== VISION ===================== -->
+    <section class="vision" id="vision">
+      <div class="wrap">
+        <span class="label reveal"
+          ><span class="dot"></span>Where I'm Going</span
+        >
+        <h2 class="vision__big reveal" data-d="1">
+          I'm not building toward a job. I'm building toward
+          <span class="amber">scalable impact.</span>
+        </h2>
+        <div class="vision__domains">
+          <span class="vision__domain reveal" data-d="1"
+            >Cloud Infrastructure</span
+          >
+          <span class="vision__domain reveal" data-d="2">System Design</span>
+          <span class="vision__domain reveal" data-d="3">DevOps</span>
+          <span class="vision__domain reveal" data-d="4">Open Source</span>
+        </div>
+        <p class="vision__coda reveal" data-d="2">
+          My ultimate career objective is to become a <span class="amber">highly skilled Software
+          Engineer</span> specializing in <span class="amber">scalable cloud infrastructure</span>, <span class="amber">robust system
+          design</span>, and <span class="amber">streamlined DevOps practices</span>.
+          <span class="accent-text"
+            >The tools are finally here. I intend to engineer the future.</span
+          >
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section class="contact section-pad" id="contact">
+      <div class="wrap">
+        <span class="label reveal"><span class="dot"></span>Contact</span>
+        <h2 class="contact__title reveal" data-d="1">
+          Let's Build<br /><span class="amber">Something.</span>
+        </h2>
+        <p class="contact__sub reveal" data-d="2">
+          Founders, researchers, recruiters — if you're working on something
+          <span class="amber">hard and worth building</span>, I want to hear about it.
+        </p>
+
+        <div class="contact__links">
+          <a
+            class="clink reveal"
+            data-d="1"
+            href="mailto:nareshadhe01@gmail.com"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3 7 9 6 9-6" />
+            </svg>
+            <span class="k">Email</span
+            ><span class="v">nareshadhe01@gmail.com</span>
+          </a>
+          <a
+            class="clink reveal"
+            data-d="2"
+            href="https://www.linkedin.com/in/naresh-adhe/"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21H21v-5.3c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21H13z"
+              />
+            </svg>
+            <span class="k">LinkedIn</span
+            ><span class="v">/naresh-adhe</span>
+          </a>
+          <a
+            class="clink reveal"
+            data-d="3"
+            href="https://github.com/NareshAdhe"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.4 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.3 10.3 0 0 0 22 12.3C22 6.6 17.5 2 12 2Z"
+              />
+            </svg>
+            <span class="k">GitHub</span><span class="v">/NareshAdhe</span>
+          </a>
+          <a
+            class="clink reveal"
+            data-d="4"
+            href="https://leetcode.com/u/naresh_adhe/"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <path d="M14 4 7 11l7 7M9 12h11" />
+            </svg>
+            <span class="k">LeetCode</span><span class="v">/naresh_adhe</span>
+          </a>
+        </div>
+
+        <div class="contact__cta reveal" data-d="3">
+          <a class="btn btn--primary" href="mailto:nareshadhe01@gmail.com">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3 7 9 6 9-6" />
+            </svg>
+            Start a conversation
+          </a>
+          <a
+            class="btn btn--ghost"
+            href="https://drive.google.com/file/d/1RtPvs4Hr11Oxd0JA3SXu32Yr_FO9eNvB/view?usp=sharing"
+            target="_blank"
+            rel="noopener"
+            >Download Resume ↗</a
+          >
+        </div>
+
+        <div class="foot">
+          <span>© 2026 Naresh Adhe</span>
+          <span class="dim"
+            >I don&apos;t wait for the future — I engineer it.</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/gsap-engine.js"></script>
+  </body>
+</html>
+

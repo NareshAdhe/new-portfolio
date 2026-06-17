@@ -1,0 +1,417 @@
+/* ============================================================
+   NARESH ADHE — premium.css
+   Ultra-premium animation layer: scroll progress, magnetic
+   buttons, custom cursor, parallax, marquee, micro-interactions
+   ALL animations use transform + opacity only (GPU-composited)
+   ============================================================ */
+
+/* ============================================================
+   SCROLL PROGRESS BAR — top-of-viewport reading progress
+   ============================================================ */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 9999;
+  pointer-events: none;
+  overflow: hidden;
+}
+.scroll-progress__bar {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent), var(--accent-bright));
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
+  box-shadow: 0 0 12px var(--accent-glow), 0 0 4px var(--accent);
+}
+.scroll-progress__glow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 100%;
+  background: radial-gradient(circle at right center, var(--accent-bright), transparent 70%);
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 0.3s ease;
+}
+.scroll-progress.is-scrolling .scroll-progress__glow {
+  opacity: 1;
+}
+
+/* ============================================================
+   CUSTOM CURSOR — premium dot + ring follower
+   ============================================================ */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 10000;
+  will-change: transform;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s var(--ease), height 0.25s var(--ease), background 0.25s var(--ease);
+}
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(var(--accent-rgb), 0.35);
+  pointer-events: none;
+  z-index: 10000;
+  will-change: transform;
+  transform: translate(-50%, -50%);
+  transition: width 0.35s var(--ease), height 0.35s var(--ease),
+              border-color 0.25s var(--ease), background 0.3s var(--ease);
+}
+
+/* Cursor hover states */
+.cursor-dot.is-hover {
+  width: 12px;
+  height: 12px;
+  background: var(--accent-bright);
+}
+.cursor-ring.is-hover {
+  width: 56px;
+  height: 56px;
+  border-color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.06);
+}
+.cursor-dot.is-text {
+  width: 3px;
+  height: 24px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+.cursor-ring.is-text {
+  width: 2px;
+  height: 2px;
+  border-color: transparent;
+}
+.cursor-dot.is-hidden,
+.cursor-ring.is-hidden {
+  opacity: 0;
+}
+
+/* Hide default cursor on desktop when custom cursor is active */
+@media (hover: hover) and (pointer: fine) {
+  body { cursor: none; }
+  a, button, input, textarea, select, .btn, .ars-pill, .nav__link,
+  .nav__cta, .clink, .mission__link, .frame.is-tilt, .chip { cursor: none; }
+}
+/* Hide on touch devices */
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
+/* ============================================================
+   MAGNETIC BUTTON EFFECT — buttons respond to cursor proximity
+   ============================================================ */
+.btn, .nav__cta, .ars-pill, .clink, .nav__link, .nav__theme {
+  transition: background 0.25s var(--ease),
+              box-shadow 0.25s var(--ease), color 0.25s var(--ease),
+              border-color 0.25s var(--ease);
+}
+
+/* ============================================================
+   HORIZONTAL MARQUEE TICKER — between sections for visual flair
+   ============================================================ */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 28px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee__track {
+  display: inline-flex;
+  animation: marqueeScroll 45s linear infinite;
+  will-change: transform;
+}
+.marquee__track:hover {
+  animation-play-state: paused;
+}
+.marquee__item {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(36px, 5vw, 72px);
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-3);
+  padding: 0 48px;
+  display: inline-flex;
+  align-items: center;
+  gap: 48px;
+  transition: color 0.4s var(--ease), -webkit-text-stroke-color 0.4s var(--ease);
+  cursor: default;
+}
+.marquee__item:hover {
+  color: var(--accent);
+  -webkit-text-stroke-color: var(--accent);
+}
+.marquee__sep {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.35;
+  flex-shrink: 0;
+}
+@keyframes marqueeScroll {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Reverse direction marquee */
+.marquee--reverse .marquee__track {
+  animation-direction: reverse;
+}
+
+/* ============================================================
+   PARALLAX SECTION LAYERS — depth effect on scroll
+   ============================================================ */
+[data-parallax] {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* ============================================================
+   SECTION DIVIDER — decorative line between major sections
+   ============================================================ */
+.section-divider {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  opacity: 0.35;
+}
+.section-divider__line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+.section-divider__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* ============================================================
+   SMOOTH SECTION ENTRANCE — sections slide up with parallax
+   ============================================================ */
+.section-pad {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* ============================================================
+   HOVER GLOW EFFECT — ambient glow on interactive cards
+   ============================================================ */
+.ars-tile, .clink, .stat {
+  position: relative;
+}
+.ars-tile::after, .clink::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  opacity: 0;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%),
+    rgba(var(--accent-rgb), 0.15), transparent 60%);
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease);
+  z-index: 0;
+}
+.ars-tile:hover::after, .clink:hover::after {
+  opacity: 1;
+}
+
+/* ============================================================
+   SMOOTH TEXT GRADIENT SHIMMER — for hero headline on hover
+   ============================================================ */
+.hero__h1 .l:first-child {
+  background: linear-gradient(
+    90deg,
+    var(--text) 0%,
+    var(--text) 40%,
+    var(--accent-bright) 50%,
+    var(--text) 60%,
+    var(--text) 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerText 8s ease-in-out infinite;
+  animation-delay: 3s;
+}
+@keyframes shimmerText {
+  0%, 100% { background-position: 100% center; }
+  50%      { background-position: 0% center; }
+}
+
+/* ============================================================
+   STAT NUMBER HOVER LIFT — micro interaction on stat cards
+   ============================================================ */
+.stat {
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.3s var(--ease), border-color 0.25s var(--ease),
+              box-shadow 0.35s var(--ease);
+}
+.stat:hover {
+  transform: translate3d(0, -4px, 0);
+  box-shadow: 0 16px 40px -12px var(--shadow-ink);
+}
+.stat:hover .stat__n {
+  transform: scale(1.08);
+}
+.stat__n {
+  transition: transform 0.35s var(--ease), color 0.3s var(--ease);
+}
+
+/* ============================================================
+   HERO H1 LETTER SPACING ANIMATION
+   ============================================================ */
+.hero__h1 {
+  transition: letter-spacing 1.2s var(--ease);
+}
+
+/* ============================================================
+   SECTION TITLE HOVER UNDERLINE GROW
+   ============================================================ */
+.section-title {
+  position: relative;
+}
+
+/* ============================================================
+   NAV LINK PILL HOVER — subtle background on hover
+   ============================================================ */
+.nav__link {
+  padding: 5px 10px;
+  border-radius: 6px;
+  transition: color 0.25s var(--ease), background 0.25s var(--ease);
+}
+.nav__link:hover {
+  background: var(--accent-dim);
+}
+
+/* ============================================================
+   CONTACT CARD STAGGER HOVER — scale siblings on hover
+   ============================================================ */
+.contact__links:hover .clink {
+  opacity: 0.65;
+  transform: scale(0.97);
+}
+.contact__links:hover .clink:hover {
+  opacity: 1;
+  transform: translateY(-4px) scale(1.02);
+}
+.clink {
+  transition: background 0.35s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+
+/* ============================================================
+   VISION SECTION — ambient pulse background
+   ============================================================ */
+.vision::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.08), transparent 70%);
+  transform: translate(-50%, -50%);
+  animation: visionPulse 6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes visionPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  50%      { transform: translate(-50%, -50%) scale(1.4); opacity: 0.8; }
+}
+
+/* ============================================================
+   FEATURE IMAGE FLOAT ENHANCEMENT
+   ============================================================ */
+.feature__media .frame {
+  transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease),
+              border-color 0.35s var(--ease);
+}
+.feature__media .frame:hover {
+  box-shadow: 0 30px 70px -20px var(--shadow-ink),
+              0 0 0 1px rgba(var(--accent-rgb), 0.12);
+}
+
+/* ============================================================
+   SMOOTH SCROLL SNAP HINT — gentle deceleration feel
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ============================================================
+   LOADING SKELETON — for images before they load
+   ============================================================ */
+.frame img {
+  background: linear-gradient(110deg, var(--card-2) 25%, var(--border) 37%, var(--card-2) 63%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+}
+.frame img.is-loaded {
+  animation: none;
+  background: none;
+}
+@keyframes skeletonShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================================================
+   REDUCED MOTION — respect user preferences
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none !important; }
+  .cursor-dot, .cursor-ring { display: none !important; }
+  .scroll-progress__glow { display: none; }
+  .hero__h1 .l:first-child { animation: none !important; -webkit-text-fill-color: var(--text); }
+  .vision::after { animation: none !important; }
+  .frame img { animation: none !important; }
+  [data-parallax] { transform: none !important; }
+}
+
+/* ============================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================ */
+@media (max-width: 860px) {
+  .marquee__item { font-size: clamp(28px, 5vw, 48px); padding: 0 28px; gap: 28px; }
+  .section-divider { padding: 0 22px; }
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
+@media (max-width: 560px) {
+  .marquee { padding: 18px 0; }
+  .marquee__item { font-size: 24px; padding: 0 18px; gap: 18px; }
+  .marquee__sep { width: 8px; height: 8px; }
+}
